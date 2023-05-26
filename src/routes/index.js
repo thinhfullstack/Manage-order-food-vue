@@ -1,35 +1,54 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import HomePage from '../views/home-page/HomePage.vue';
+import Home from '../views/home/Index.vue';
 // users
 import Login from '../views/users/Login.vue';
 
 // navbar
-import CartLunchP2 from '../views/navbar/CartLunchP2.vue';
-import CartLunchP8 from '../views/navbar/CartLunchP8.vue';
-import CartLunchP1 from '../views/navbar/CartLunchP1.vue';
+import OrderCalendar from '../views/navbar/OrderCalendar.vue';
+import NoticePage from '../views/navbar/NoticePage.vue';
+import MyPageAdmin from '../views/navbar/MyPageAdmin.vue';
 // register customers
-import CartLunchP5 from '../views/register-customer/CartLunchP5.vue';
-import CartLunchP5_1 from '../views/register-customer/CartLunchP5_1.vue';
-import CartLunchP5_2 from '../views/register-customer/CartLunchP5_2.vue';
+import CartLunchP5 from '../views/register-customer/Index.vue';
+import CartLunchP5_1 from '../views/register-customer/ConfirmationScreen.vue';
+import CartLunchP5_2 from '../views/register-customer/Complete.vue';
 // management order information
-import CartLunchP10 from '../views/manage-order-information/CartLunchP10.vue';
-import CartLunchP13 from '../views/manage-order-information/CartLunchP13.vue';
-import CartLunchP13_2 from '../views/manage-order-information/CartLunchP13_2.vue';
-import CartLunchP13_3 from '../views/manage-order-information/CartLunchP13_3.vue';
-import CartLunchP9 from '../views/manage-order-information/CartLunchP9.vue';
+import Index from '../views/manage-order-information/Index.vue';
+import RegisterOrder from '../views/manage-order-information/RegisterOrder.vue';
+import ConfirmationScreen from '../views/manage-order-information/ConfirmationScreen.vue';
+import Complete from '../views/manage-order-information/Complete.vue';
+import Administrator from '../views/manage-order-information/Administrator.vue';
 // order history
 import MyPageTop from '../views/order-history/MyPageTop.vue';
 import Monthly from '../views/order-history/Monthly.vue';
 import Daily from '../views/order-history/Daily.vue';
 import DailyDetails from '../views/order-history/DailyDetails.vue';
 import Question from '../views/order-history/Question.vue';
+// calendar
+import TopOrderDate from '../views/calendar/TopOrderDate.vue';
+import TopOrderMultipleDays from '../views/calendar/TopOrderMultipleDays.vue';
+import TopAdministratorDay from '../views/calendar/TopAdministratorDay.vue';
+import TopAdministratorMultipleDays from '../views/calendar/TopAdministratorMultipleDays.vue';
+// order confirmation admin
+import OrderDetailedConfirmationAdmin from '../views/order-confirm-admin/OrderDetailedConfirmationAdmin.vue';
+// order screen
+import MenuOrder from '../views/order-screen/OrderMenu.vue';
+import CompletedOrder from '../views/order-screen/OrderCompleted.vue';
+import PaymentConfirmation from '../views/order-screen/payment/PaymentConfirmation.vue';
+// order screen - other orders
+import OrderDelete from '../views/order-screen/other-orders/OrderDelete.vue';
+import OrderConfirmation from '../views/order-screen/other-orders/OrderConfirmation.vue';
+// notice
+import NoticeList from '../views/notice/NoticeList.vue';
+import NoticeDetails from '../views/notice/NoticeDetails.vue';
+// support
+import Support from '../views/supports/Support.vue';
 
 
 const routes = [
     {
       path: '/',
-      component: HomePage,
+      component: Home,
       name: 'home',
     },
 
@@ -48,18 +67,18 @@ const routes = [
       path: '/navbar',
       children: [
         {
-          path: '/navbar/cart-lunch_p2',
-          component: CartLunchP2,
+          path: '/navbar/order-calendar',
+          component: OrderCalendar,
           name: 'cart-lunch_p2',
         },
         {
-          path: '/navbar/cart-lunch_p8',
-          component: CartLunchP8,
+          path: '/navbar/notice-page',
+          component: NoticePage,
           name: 'cart-lunch_p8',
         },
         {
-          path: '/navbar/cart-lunch_p1',
-          component: CartLunchP1,
+          path: '/navbar/my-page-admin',
+          component: MyPageAdmin,
           name: 'cart-lunch_p1',
         }
       ]
@@ -90,28 +109,28 @@ const routes = [
       path: '/manage-order-information',
       children: [
         {
-          path: '/manage-order-information/cart-lunch_p10',
-          component: CartLunchP10,
+          path: '/manage-order-information/index',
+          component: Index,
           name: 'cart-lunch_p10',
         },
         {
-          path: '/manage-order-information/cart-lunch_p13',
-          component: CartLunchP13,
+          path: '/manage-order-information/register-order',
+          component: RegisterOrder,
           name: 'cart-lunch_p13',
         },
         {
-          path: '/manage-order-information/cart-lunch_p13_2',
-          component: CartLunchP13_2,
+          path: '/manage-order-information/confirmation-screen',
+          component: ConfirmationScreen,
           name: 'cart-lunch_p13_2',
         },
         {
-          path: '/manage-order-information/cart-lunch_p13_3',
-          component: CartLunchP13_3,
+          path: '/manage-order-information/complete',
+          component: Complete,
           name: 'cart-lunch_p13_3',
         },
         {
-          path: '/manage-order-information/cart-lunch_p9',
-          component: CartLunchP9,
+          path: '/manage-order-information/administrator',
+          component: Administrator,
           name: 'cart-lunch_p9',
         }
       ]
@@ -146,6 +165,91 @@ const routes = [
           name: 'question',
         }
       ]
+    },
+
+    {
+      path: '/calendar',
+      children: [
+        {
+          path: '/calendar/top-order-day',
+          component: TopOrderDate,
+          name: 'top-order-day',
+        },
+        {
+          path: '/calendar/top-order-multiple-days',
+          component: TopOrderMultipleDays,
+          name: 'top-order-multiple-days'
+        },
+        {
+          path: '/calendar/top-administrator-day',
+          component: TopAdministratorDay,
+          name: 'top-administrator-day'
+        },
+        {
+          path: '/calendar/top-administrator-multiple-days',
+          component: TopAdministratorMultipleDays,
+          name: 'top-administrator-multiple-days'
+        }
+      ]
+    },
+
+    {
+      path: '/order-confirm-admin',
+      component: OrderDetailedConfirmationAdmin,
+      name: 'order-confirm-admin'
+    },
+
+    {
+      path: '/order-screen',
+      children: [
+        {
+          path: '/order-screen/menu-order',
+          component: MenuOrder,
+          name: 'menu-order'
+        },
+        {
+          path: '/order-screen/completed-order',
+          component: CompletedOrder,
+          name: 'completed-order'
+        },
+        {
+          path: '/order-screen/payment-confirmation',
+          component: PaymentConfirmation,
+          name: 'payment-confirmation'
+        },
+        {
+          path: '/order-screen/order-delete',
+          component: OrderDelete,
+          name: 'order-delete'
+        },
+        {
+          path: '/order-screen/order-confirmation',
+          component: OrderConfirmation,
+          name: 'order-confirmation'
+        }
+      ]
+    },
+
+    {
+      path: '/notice',
+      children: [
+        {
+          path: '/notice/notice-list',
+          component: NoticeList,
+          name: 'notice-list'
+        },
+        {
+          path: '/notice/notice-details',
+          component: NoticeDetails,
+          name: 'notice-details'
+        }
+      ]
+    },
+
+    {
+      path: '/support',
+      component: Support,
+      name: 'support'
     }
 
 ]
