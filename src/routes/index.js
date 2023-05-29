@@ -1,17 +1,18 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 import Home from '../views/home/Index.vue';
-// users
-import Login from '../views/users/Login.vue';
+// auth
+import Login from '../views/auth/Login.vue';
+import Register from '../views/auth/Register.vue';
+// auth register customers
+import ConfirmationRegister from '../views/auth/ConfirmationRegister.vue';
+import CompleteRegister from '../views/auth/CompleteRegister.vue';
 
 // navbar
 import OrderCalendar from '../views/navbar/OrderCalendar.vue';
 import NoticePage from '../views/navbar/NoticePage.vue';
 import MyPageAdmin from '../views/navbar/MyPageAdmin.vue';
-// register customers
-import CartLunchP5 from '../views/register-customer/Index.vue';
-import CartLunchP5_1 from '../views/register-customer/ConfirmationScreen.vue';
-import CartLunchP5_2 from '../views/register-customer/Complete.vue';
+
 // management order information
 import Index from '../views/manage-order-information/Index.vue';
 import RegisterOrder from '../views/manage-order-information/RegisterOrder.vue';
@@ -53,12 +54,27 @@ const routes = [
     },
 
     {
-      path: '/users',
+      path: '/auth',
       children: [
         {
-          path: '/users/login',
+          path: '/auth/login',
           component: Login,
           name: 'login',
+        },
+        {
+          path: '/auth/register',
+          component: Register,
+          name: 'register',
+        },
+        {
+          path: '/auth/register/confirmationRegister',
+          component: ConfirmationRegister,
+          name: 'confirmation-register',
+        },
+        {
+          path: '/auth/register/completeRegister',
+          component: CompleteRegister,
+          name: 'complete-register',
         }
       ]
     },
@@ -81,27 +97,6 @@ const routes = [
           component: MyPageAdmin,
           name: 'cart-lunch_p1',
         }
-      ]
-    },
-
-    {
-      path: '/register-customers',
-      children: [
-        {
-          path: '/register-customers/cart-lunch_p5',
-          component: CartLunchP5,
-          name: 'cart-lunch_p5',
-        },
-        {
-          path: '/register-customers/cart-lunch_p5_1',
-          component: CartLunchP5_1,
-          name: 'cart-lunch_p5_1',
-        },
-        {
-          path: '/register-customers/cart-lunch_p5_2',
-          component: CartLunchP5_2,
-          name: 'cart-lunch_p5_2',
-        },
       ]
     },
 

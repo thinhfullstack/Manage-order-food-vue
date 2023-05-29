@@ -30,7 +30,7 @@
                                     </label>
                                 </div>
                                 <!-- 会社･勤務先フォーム -->
-                                <div id="company_form">
+                                <div class="company_form">
                                     <div class="form_box">
                                         <div class="form_headline">
                                         団体名
@@ -159,7 +159,7 @@
                             </div>
                             <div class="button">
                                 <div>
-                                <input type="submit" class="button01" name="Submit" value="確認画面へ">
+                                    <input type="submit" class="button01" name="Submit" value="確認画面へ">
                                 </div>
                             </div>
                         </div>

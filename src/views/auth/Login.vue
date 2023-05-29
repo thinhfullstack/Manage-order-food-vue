@@ -50,7 +50,7 @@
                             </p>
                             <div class="button">
                                 <div>
-                                <a href="" class="button01">
+                                <a href="#" class="button01">
                                     新規登録する
                                 </a>
                                 </div>

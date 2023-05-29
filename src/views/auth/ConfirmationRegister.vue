@@ -7,7 +7,7 @@
                 </div>
             </div>
             <main>
-            <form action="cart-lunch_p5_2.html">
+            <form>
                 <section>
                     <div class="section_header">
                     <h2 class="section_title">登録内容の確認</h2>
