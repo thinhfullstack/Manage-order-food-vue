@@ -4,13 +4,13 @@
             <main class="container">
                 <h1>ページ一覧</h1>
                 <div>
-                    <router-link :to="{name: 'cart-lunch_p5'}" target="_blank">
+                    <router-link :to="{name: 'register'}" target="_blank">
                         お客様登録(5)
                     </router-link><br>
-                    <router-link :to="{name: 'cart-lunch_p5_1'}" target="_blank">
+                    <router-link :to="{name: 'confirmation-register'}" target="_blank">
                         お客様登録：確認画面(5_1)
                     </router-link><br>
-                    <router-link :to="{name: 'cart-lunch_p5_2'}" target="_blank">
+                    <router-link :to="{name: 'complete-register'}" target="_blank">
                         お客様登録：完了(5_2)
                     </router-link>
                 </div>
