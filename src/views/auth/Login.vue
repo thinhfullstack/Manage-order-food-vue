@@ -22,22 +22,22 @@
                             <input type="email"
                                 v-on:keyup.enter="login()"
                                 v-model="state.loginForm.email"
-                                v-bind:class="{'is-invalid': errorLogin.email}"
-                                @blur="validateFormLogin()"
+                                v-bind:class="v$.email.$errors == !v$.email.$errors ? 'blue' : 'error'"
+                                @blur="v$.$touch()"
                                 placeholder="example@example.com"
                             >
-                            <span class="invalid-feedback" v-if="errorLogin.email">{{ errorLogin.email }}</span>
+                            <span class="invalid-feedback" v-for="error of v$.email.$errors" :key="error.$uid">{{ error.$message }}</span>
                         </p>
                         <p>
                             パスワード<br>
                             <input type="password" 
                                 v-on:keyup.enter="login()"
                                 v-model="state.loginForm.password"
-                                v-bind:class="{'is-invalid': errorLogin.password}"
-                                @blur="validateFormLogin()"
+                                v-bind:class="v$.email.$errors == !v$.email.$errors ? 'blue' : 'error'"
+                                @blur="v$.$touch()"
                                 placeholder="●●●●●●"
                             >
-                            <span class="invalid-feedback" v-if="errorLogin.password">{{ errorLogin.password }}</span>
+                            <span class="invalid-feedback" v-for="error of v$.password.$errors" :key="error.$uid">{{ error.$message }}</span>
                         </p>
                         <div class="button" @click.prevent="login()">
                             <div>
@@ -86,8 +86,11 @@
 import layout from '../layout/App.vue';
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import Swal from 'sweetalert2'
+
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, helpers } from '@vuelidate/validators'
 
 const router = useRouter()
 const route = useRoute()
@@ -99,32 +102,16 @@ const state = reactive({
     }
 })
 
-const errorLogin = ref({
-    email: '',
-    password: ''
-})
-
-const isEmail = (value) => {
-    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)
+const validations = {
+    email: { required:helpers.withMessage("Email is required", required), email, $autoDirty: true},
+    password: { required:helpers.withMessage("Password is required", required), $autoDirty: true}
 }
 
-const validateFormLogin = () => {
-    errorLogin.value.email = ''
-    errorLogin.value.password = ''
-
-    if(!state.loginForm.email) {
-        errorLogin.value.email = "Email is required"
-    } else if(!isEmail(state.loginForm.email)) {
-        errorLogin.value.email = "Email must be in the correct format"
-    }
-
-    if(!state.loginForm.password) {
-        errorLogin.value.password = "Password is required"
-    }
-}
+const v$ = useVuelidate(validations, state.loginForm)
 
 const login = () => {
-    validateFormLogin();
+    v$.value.$touch()
+
     axios.post(`http://localhost:8000/api/login`, state.loginForm).then(res => {
         if(!res.data.success) {
             alertMessage('error', 'Email or password is required')
@@ -172,5 +159,13 @@ const alertMessage = (icon, message) => {
 }
 .invalid-feedback {
     color: red;
+}
+.error {
+    border: 2px solid red !important;
+    border-radius: 3px;
+}
+.blue {
+    border: 2px solid #ccc !important;
+    border-radius: 3px;
 }
 </style>
