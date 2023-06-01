@@ -39,7 +39,7 @@
                             >
                             <span class="invalid-feedback" v-for="error of v$.password.$errors" :key="error.$uid">{{ error.$message }}</span>
                         </p>
-                        <div class="button" @click.prevent="login()">
+                        <div class="button" @click.prevent="userStore.login">
                             <div>
                             <input type="submit" class="button01" value="ログインする">
                             </div>
@@ -92,6 +92,10 @@ import Swal from 'sweetalert2'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers } from '@vuelidate/validators'
 
+import useUserStore from '../../store/userStore'
+
+const userStore = useUserStore()
+
 const router = useRouter()
 const route = useRoute()
 
@@ -109,45 +113,11 @@ const validations = {
 
 const v$ = useVuelidate(validations, state.loginForm)
 
-const login = () => {
-    v$.value.$touch()
+// const login = () => {
+//     v$.value.$touch()
 
-    axios.post(`http://localhost:8000/api/login`, state.loginForm).then(res => {
-        if(!res.data.success) {
-            alertMessage('error', 'Email or password is required')
-            return
-        };
-
-        localStorage.setItem('user_info', JSON.stringify({
-            user: res.data.user,
-            token: res.data.token
-        }))
-
-    }).catch(() => {
-        alertMessage('error', 'Something went wrong')
-    })
-
-    router.push({name: 'home'})
-}
-
-const alertMessage = (icon, message) => {
-    const Toast = Swal.mixin({
-		toast: true,
-		position: 'top-end',
-		showConfirmButton: false,
-		timer: 3000,
-		timerProgressBar: true,
-		didOpen: (toast) => {
-			toast.addEventListener('mouseenter', Swal.stopTimer)
-			toast.addEventListener('mouseleave', Swal.resumeTimer)
-		}
-	})
-
-	Toast.fire({
-		icon: icon,
-		title: message
-	})
-}
+//     router.push({name: 'home'})
+// }
 
 
 </script>
