@@ -45,6 +45,9 @@ import NoticeDetails from '../views/notice/NoticeDetails.vue';
 // support
 import Support from '../views/supports/Support.vue';
 
+// demo
+import Count from '../views/demo/Count.vue';
+
 
 const routes = [
     {
@@ -245,6 +248,12 @@ const routes = [
       path: '/support',
       component: Support,
       name: 'support'
+    },
+
+    {
+      path: '/count',
+      component: Count,
+      name: 'count'
     }
 
 ]
