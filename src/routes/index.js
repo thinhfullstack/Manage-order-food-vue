@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import useUserStore from '../store/userStore'
 
 import Home from '../views/home/Index.vue';
 // auth
@@ -45,12 +46,16 @@ import NoticeDetails from '../views/notice/NoticeDetails.vue';
 // support
 import Support from '../views/supports/Support.vue';
 
+// demo
+import Count from '../views/demo/Count.vue';
+
 
 const routes = [
     {
       path: '/',
       component: Home,
       name: 'home',
+      meta: { requiresAuth: true }
     },
 
     {
@@ -245,6 +250,12 @@ const routes = [
       path: '/support',
       component: Support,
       name: 'support'
+    },
+
+    {
+      path: '/count',
+      component: Count,
+      name: 'count'
     }
 
 ]
@@ -252,6 +263,22 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+})
+
+
+router.beforeEach((to, from, next) => {
+  let userStore = useUserStore()
+  let loggedUser = userStore.me()
+
+  if (loggedUser && loggedUser.token && to.name === 'login') {
+    return next({name: 'home'})
+  } 
+
+  if (!loggedUser && to.name !== 'login') {
+    return next({name: 'login'})
+  }
+
+  next()
 })
 
 export default router

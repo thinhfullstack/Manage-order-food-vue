@@ -19,15 +19,29 @@
                         <div class="login_box">
                         <p>
                             メールアドレス<br>
-                            <input type="email" name="" placeholder="example@example.com" value="">
+                            <input type="email"
+                                v-on:keyup.enter="handleLogin()"
+                                v-model="state.loginForm.email"
+                                v-bind:class="v$.email.$errors == !v$.email.$errors ? 'blue' : 'error'"
+                                @blur="v$.$touch()"
+                                placeholder="example@example.com"
+                            >
+                            <span class="invalid-feedback" v-for="error of v$.email.$errors" :key="error.$uid">{{ error.$message }}</span>
                         </p>
                         <p>
                             パスワード<br>
-                            <input type="password" name="" placeholder="●●●●●●" value="">
+                            <input type="password" 
+                                v-on:keyup.enter="handleLogin()"
+                                v-model="state.loginForm.password"
+                                v-bind:class="v$.email.$errors == !v$.email.$errors ? 'blue' : 'error'"
+                                @blur="v$.$touch()"
+                                placeholder="●●●●●●"
+                            >
+                            <span class="invalid-feedback" v-for="error of v$.password.$errors" :key="error.$uid">{{ error.$message }}</span>
                         </p>
-                        <div class="button">
+                        <div class="button" @click.prevent="handleLogin()">
                             <div>
-                            <input type="submit" class="button01" name="" value="ログインする">
+                            <input type="submit" class="button01" value="ログインする">
                             </div>
                         </div>
                         <div>
@@ -42,21 +56,21 @@
                         </div>
 
                         <div class="login_box">
-                        <div class="login_flex">
-                            <div>
-                            <p class="login_headline">３分で簡単登録!</p>
-                            <p class="login_text">
-                                はじめての方はこちらから<br>お客様登録をお願いします。
-                            </p>
-                            <div class="button">
+                            <div class="login_flex">
                                 <div>
-                                <a href="#" class="button01">
-                                    新規登録する
-                                </a>
+                                <p class="login_headline">３分で簡単登録!</p>
+                                <p class="login_text">
+                                    はじめての方はこちらから<br>お客様登録をお願いします。
+                                </p>
+                                <div class="button">
+                                    <div>
+                                        <a href="" class="button01">
+                                            新規登録する
+                                        </a>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
                     </div>
@@ -69,5 +83,55 @@
 </template>
 
 <script setup>
-import layout from '../layout/App.vue'
+import layout from '../layout/App.vue';
+import { useRoute, useRouter } from "vue-router";
+import { reactive } from 'vue';
+
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, helpers } from '@vuelidate/validators'
+
+import useUserStore from '../../store/userStore'
+
+const userStore = useUserStore()
+const route = useRoute()
+const router = useRouter()
+
+const state = reactive({
+    loginForm: {
+        email: '',
+        password: ''
+    }
+})
+
+const validations = {
+    email: { required:helpers.withMessage("Email is required", required), email, $autoDirty: true},
+    password: { required:helpers.withMessage("Password is required", required), $autoDirty: true}
+}
+
+const v$ = useVuelidate(validations, state.loginForm)
+
+const handleLogin = () => {
+    v$.value.$touch()
+    userStore.login(state.loginForm.email, state.loginForm.password)
+    router.push({name: 'home'})
+}
+
 </script>
+
+<style scoped>
+.is-invalid {
+	border-style: solid;
+    border-color: rgb(201, 76, 76);
+}
+.invalid-feedback {
+    color: red;
+}
+.error {
+    border: 2px solid red !important;
+    border-radius: 3px;
+}
+.blue {
+    border: 2px solid #ccc !important;
+    border-radius: 3px;
+}
+</style>
