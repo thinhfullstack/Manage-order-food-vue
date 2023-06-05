@@ -20,7 +20,7 @@
                         <p>
                             メールアドレス<br>
                             <input type="email"
-                                v-on:keyup.enter="login()"
+                                v-on:keyup.enter="handleLogin()"
                                 v-model="state.loginForm.email"
                                 v-bind:class="v$.email.$errors == !v$.email.$errors ? 'blue' : 'error'"
                                 @blur="v$.$touch()"
@@ -31,7 +31,7 @@
                         <p>
                             パスワード<br>
                             <input type="password" 
-                                v-on:keyup.enter="login()"
+                                v-on:keyup.enter="handleLogin()"
                                 v-model="state.loginForm.password"
                                 v-bind:class="v$.email.$errors == !v$.email.$errors ? 'blue' : 'error'"
                                 @blur="v$.$touch()"
@@ -39,7 +39,7 @@
                             >
                             <span class="invalid-feedback" v-for="error of v$.password.$errors" :key="error.$uid">{{ error.$message }}</span>
                         </p>
-                        <div class="button" @click.prevent="userStore.login">
+                        <div class="button" @click.prevent="handleLogin()">
                             <div>
                             <input type="submit" class="button01" value="ログインする">
                             </div>
@@ -85,9 +85,7 @@
 <script setup>
 import layout from '../layout/App.vue';
 import { useRoute, useRouter } from "vue-router";
-import axios from "axios";
 import { reactive } from 'vue';
-import Swal from 'sweetalert2'
 
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers } from '@vuelidate/validators'
@@ -95,9 +93,8 @@ import { required, email, helpers } from '@vuelidate/validators'
 import useUserStore from '../../store/userStore'
 
 const userStore = useUserStore()
-
-const router = useRouter()
 const route = useRoute()
+const router = useRouter()
 
 const state = reactive({
     loginForm: {
@@ -113,12 +110,11 @@ const validations = {
 
 const v$ = useVuelidate(validations, state.loginForm)
 
-// const login = () => {
-//     v$.value.$touch()
-
-//     router.push({name: 'home'})
-// }
-
+const handleLogin = () => {
+    v$.value.$touch()
+    userStore.login(state.loginForm.email, state.loginForm.password)
+    router.push({name: 'home'})
+}
 
 </script>
 

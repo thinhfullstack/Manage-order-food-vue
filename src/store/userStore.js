@@ -1,59 +1,45 @@
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import axios from "axios";
-import Swal from 'sweetalert2'
+import SwalAlertHelper from '../utils/SwalAlertHelper';
 
 const useUserStore = defineStore('userStore', () => {
-    const user = reactive({
-        loginForm: {
-            email: '',
-            password: ''
-        }
-    })
+    const user = ref('')
 
-    const login = () => {
-        axios.post(`http://localhost:8000/api/login`, user.loginForm).then(res => {
-            if(!res.data.success) {
-                alertMessage('error', 'Email or password is required')
+    const login = (email, password) => {
+        axios.post(`http://localhost:8000/api/login`, {
+            email: email,
+            password: password
+        }).then(res => {
+            if (!res.data.success) {
+                SwalAlertHelper.warningForm('error', 'Email or password is required')
                 return 
             }
 
-            localStorage.setItem('user_info', JSON.stringify({
+            let userInfo = {
                 user: res.data.user,
                 token: res.data.token
-            }))
+            }
+
+            user.value = userInfo
+
+            localStorage.setItem('user_info', JSON.stringify(userInfo))
 
         }).catch(() => {
-            alertMessage('error', 'Something went wrong')
+            SwalAlertHelper.warningForm('error', 'Something went wrong')
         })
+    }
 
+    const logout = () => {
+        return localStorage.removeItem('user_info')
     }
 
     const me = () => {
-        
-    }
-
-    const alertMessage = (icon, message) => {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-    
-        Toast.fire({
-            icon: icon,
-            title: message
-        })
+        return JSON.parse(localStorage.getItem('user_info'));
     }
 
     return {
-        user ,login, me
+        user ,login, logout, me
     }
 })
 

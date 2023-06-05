@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import useUserStore from '../store/userStore'
 
 import Home from '../views/home/Index.vue';
 // auth
@@ -54,6 +55,7 @@ const routes = [
       path: '/',
       component: Home,
       name: 'home',
+      meta: { requiresAuth: true }
     },
 
     {
@@ -263,14 +265,16 @@ const router = createRouter({
   routes,
 })
 
+
 router.beforeEach((to, from, next) => {
-  let userInfo = JSON.parse(localStorage.getItem('user_info'));
+  let userStore = useUserStore()
+  let loggedUser = userStore.me()
 
-  if(userInfo && userInfo.token && to.name === 'login') {
+  if (loggedUser && loggedUser.token && to.name === 'login') {
     return next({name: 'home'})
-  }
+  } 
 
-  if(!userInfo && to.name !== 'login') {
+  if (!loggedUser && to.name !== 'login') {
     return next({name: 'login'})
   }
 
