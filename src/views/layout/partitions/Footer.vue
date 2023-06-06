@@ -47,9 +47,9 @@
         </div>
             <div class="news_more">
                 <p class="order_day_single">
-                    <a href="cart-lunch_p8.html">
+                    <router-link :to="{name: 'notice-page'}">
                     もっと見る
-                    </a>
+                    </router-link>
                 </p>
             </div>
         </div>

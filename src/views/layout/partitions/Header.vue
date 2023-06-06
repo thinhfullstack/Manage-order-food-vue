@@ -16,20 +16,20 @@
           <div class="header_right">
             <div class="header_icon">
               <div class="icon">
-                <router-link :to="{name: 'cart-lunch_p2'}" >
+                <router-link :to="{name: 'order-calendar'}" >
                   <svg id="icon3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.99 29.84"><defs></defs><g id="icon3_icon"><path class="cls-1_icon3" d="m16.24.4c-.78-.88-1.53-.02-1.53-.02L0,10.69v2.17h1.95s2.27,0,2.27,2.27-.03,12.17-.03,12.17c0,0,.13,2.54,2.4,2.54h7.72s1.22,0,1.22-1.3l-.04-8.8s0-1.15,1.19-1.19h4.58s1.32-.02,1.32,1.17l.02,8.94s.97,1.19,2.12,1.19c0,0,2.06-.1,2.06-2.17v-12.43s-.12-2.36,2.33-2.36l1.87.02v-2.15S16.24.4,16.24.4ZM3.76,6.11l3.99-2.47v-1.15S7.83.19,5.35.19c0,0-2.56-.07-2.56,2.39v3.43s-.09,1.16.98.1Z"/></g></svg>
                   <p class="sp_ele">ご注文</p>
                 </router-link>
               </div>
               <div class="icon">
-                <router-link :to="{name: 'cart-lunch_p8'}" class="news_icon">
+                <router-link :to="{name: 'notice-page'}" class="news_icon">
                   <div class="num">2</div>
                   <svg id="icon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.43 30.38"><g id="icon1_icon"><g><path d="m9.01,27.26c.31,1.81,1.87,3.13,3.71,3.13s3.4-1.32,3.71-3.13l.02-.11h-7.46l.02.11Z"/><path d="m25.4,22.07c-.3-.3-.61-.56-.91-.81-1.26-1.05-2.35-1.95-2.35-5.71v-2.98c0-4.38-3.08-8.22-7.34-9.19.17-.33.26-.69.26-1.05,0-1.29-1.05-2.34-2.34-2.34s-2.34,1.05-2.34,2.34c0,.36.09.71.26,1.05-4.26.96-7.34,4.81-7.34,9.19v2.98c0,3.76-1.09,4.66-2.35,5.71-.3.25-.61.51-.91.81l-.03.03v2.96h25.43v-2.96l-.03-.03Z"/></g></g></svg>
                   <p class="sp_ele">お知らせ</p>
                 </router-link>
               </div>
               <div class="icon">
-                <router-link :to="{name: 'cart-lunch_p1'}" >
+                <router-link :to="{name: 'my-page-admin'}" >
                   <svg id="icon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.22 28.34"><defs></defs><g id="icon1_icon"><path class="cls-1_icon2" d="m13.08,16.14c3.79,0,6.87-3.68,6.87-8.23S16.87,0,13.08,0s-6.87,3.37-6.87,7.91,3.08,8.23,6.87,8.23Zm12.1,8.17s-1.45-3.66-3.28-5.74c-1.83-2.08-3.97,0-3.97,0,0,0-.95,1.95-4.1,2.02h-1.07c-3.15-.06-4.1-2.02-4.1-2.02,0,0-2.4-2.08-4.22,0-1.83,2.08-3.44,5.67-3.44,5.67l-1.01,2.3c0,1.96,2.4,1.8,2.4,1.8h21.59s2.24.19,2.24-1.76l-1.04-2.27Z"/></g></svg>
                   <p class="sp_ele">マイページ</p>
                 </router-link>

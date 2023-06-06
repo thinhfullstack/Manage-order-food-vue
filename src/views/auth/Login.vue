@@ -89,6 +89,7 @@ import { reactive } from 'vue';
 
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers } from '@vuelidate/validators'
+import SwalAlertHelper from '../../utils/SwalAlertHelper';
 
 import useUserStore from '../../store/userStore'
 
@@ -112,8 +113,13 @@ const v$ = useVuelidate(validations, state.loginForm)
 
 const handleLogin = () => {
     v$.value.$touch()
-    userStore.login(state.loginForm.email, state.loginForm.password)
-    router.push({name: 'home'})
+    if(v$.value.$error || !v$.value.$error) {
+        SwalAlertHelper.messageForm('success', 'Logged in successfully')
+        
+        userStore.login(state.loginForm.email, state.loginForm.password).then(() => {
+            router.push({name: 'home'})
+        })
+    }
 }
 
 </script>

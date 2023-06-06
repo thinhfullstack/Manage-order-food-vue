@@ -7,12 +7,12 @@ const useUserStore = defineStore('userStore', () => {
     const user = ref('')
 
     const login = (email, password) => {
-        axios.post(`http://localhost:8000/api/login`, {
+        return axios.post(`http://localhost:8000/api/login`, {
             email: email,
             password: password
         }).then(res => {
             if (!res.data.success) {
-                SwalAlertHelper.warningForm('error', 'Email or password is required')
+                SwalAlertHelper.messageForm('error', 'Email or password is required')
                 return 
             }
 
@@ -26,12 +26,12 @@ const useUserStore = defineStore('userStore', () => {
             localStorage.setItem('user_info', JSON.stringify(userInfo))
 
         }).catch(() => {
-            SwalAlertHelper.warningForm('error', 'Something went wrong')
+            SwalAlertHelper.messageForm('error', 'Something went wrong')
         })
     }
 
     const logout = () => {
-        SwalAlertHelper.warningForm('success', 'Sign out successful')
+        SwalAlertHelper.messageForm('success', 'Sign out successful')
         return localStorage.removeItem('user_info')
     }
 
