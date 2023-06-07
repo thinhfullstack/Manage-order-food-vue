@@ -90,17 +90,17 @@ const routes = [
         {
           path: '/navbar/order-calendar',
           component: OrderCalendar,
-          name: 'cart-lunch_p2',
+          name: 'order-calendar',
         },
         {
           path: '/navbar/notice-page',
           component: NoticePage,
-          name: 'cart-lunch_p8',
+          name: 'notice-page',
         },
         {
           path: '/navbar/my-page-admin',
           component: MyPageAdmin,
-          name: 'cart-lunch_p1',
+          name: 'my-page-admin',
         }
       ]
     },

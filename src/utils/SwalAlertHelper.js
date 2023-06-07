@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
 export default class SwalAlertHelper {
-    static warningForm = (icon, message) => {
+    static messageForm = (icon, message) => {
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',

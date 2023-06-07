@@ -1,4 +1,4 @@
-(function($){
+$(document).ready(function() {
 
 /******************************
  * 詳細POPUP
@@ -357,26 +357,25 @@ var pagetop = $('#page_top');
 
 
 
-$(window).on('load resize', function(){
-    
-　if (window.matchMedia('(max-width: 768px)').matches){
-    var height = $('.reserve_container').height();
-    $('footer').css('padding-bottom', height + 100);
-　}
 
-　if (window.matchMedia('(max-width: 768px)').matches){
-    var text = $('.delivery_days').html();
-    if(text.length > 15 ){
-        text = text.substr(0, 15);
-    }
-    $('.delivery_days').html(text)
-　}
+
+
 
 });
 
-
-
-
-
-
-})(jQuery);
+$(window).on('load resize', function(){
+    
+    　if (window.matchMedia('(max-width: 768px)').matches){
+        var height = $('.reserve_container').height();
+        $('footer').css('padding-bottom', height + 100);
+    　}
+    
+    　if (window.matchMedia('(max-width: 768px)').matches){
+        var text = $('.delivery_days').html();
+        if(text.length > 15 ){
+            text = text.substr(0, 15);
+        }
+        $('.delivery_days').html(text)
+    　}
+    
+    });
