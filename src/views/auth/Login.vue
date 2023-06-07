@@ -64,9 +64,9 @@
                                 </p>
                                 <div class="button">
                                     <div>
-                                        <a href="" class="button01">
+                                        <router-link :to="{name: 'register'}" class="button01">
                                             新規登録する
-                                        </a>
+                                        </router-link>
                                     </div>
                                 </div>
                                 </div>

@@ -272,9 +272,9 @@ router.beforeEach((to, from, next) => {
 
   if (loggedUser && loggedUser.token && to.name === 'login') {
     return next({name: 'home'})
-  } 
+  }
 
-  if (!loggedUser && to.name !== 'login') {
+  if (!loggedUser && to.name !== 'login' && to.name !== 'register') {
     return next({name: 'login'})
   }
 

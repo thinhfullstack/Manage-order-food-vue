@@ -7,7 +7,7 @@
                 </div>
             </div>
             <main>
-                <form action="cart-lunch_p5_1.html">
+                <form>
                     <section>
                         <div class="section_header">
                             <h2 class="section_title">お客様登録</h2>
@@ -35,57 +35,112 @@
                                         <div class="form_headline">
                                         団体名
                                         </div>
-                                        <input type="text" name="" placeholder="株式会社〇〇">
+                                        <input type="text"
+                                            v-model="state.registerForm.organizationName"
+                                            v-bind:class="v$.organizationName.$errors == !v$.organizationName.$errors ? 'success' : 'error'"
+                                            @blur="v$.$touch()"
+                                            name=""
+                                            placeholder="株式会社〇〇">
+                                            <span class="invalid-feedback" v-for="error of v$.organizationName.$errors" :key="error.$uid">{{ error.$message }}</span>
                                     </div>
                                     <div class="form_box">
                                         <div class="form_headline">
                                         所属（引渡し先）
                                         </div>
-                                        <input type="text" name="" placeholder="営業部">
+                                        <input type="text" 
+                                            v-model="state.registerForm.affiliates"
+                                            v-bind:class="v$.affiliates.$errors == !v$.affiliates.$errors ? 'success' : 'error'"
+                                            @blur="v$.$touch()"
+                                            name=""
+                                            placeholder="営業部">
+                                            <span class="invalid-feedback" v-for="error of v$.affiliates.$errors" :key="error.$uid">{{ error.$message }}</span>
                                     </div>
                                     <div class="form_box">
                                         <div class="form_headline">
                                         管理者名
                                         </div>
-                                        <input type="text" name="" placeholder="山田　太郎">
+                                        <input type="text"
+                                            v-model="state.registerForm.name"
+                                            v-bind:class="v$.name.$errors == !v$.name.$errors ? 'success' : 'error'"
+                                            @blur="v$.$touch()"
+                                            name=""
+                                            placeholder="山田　太郎">
+                                            <span class="invalid-feedback" v-for="error of v$.name.$errors" :key="error.$uid">{{ error.$message }}</span>
                                     </div>
-                                <div class="form_box">
+                                <!-- <div class="form_box">
                                     <div class="form_headline">
                                         郵便番号
                                     </div>
                                     <div class="flex_wrap zip_frame">
                                         <div>
-                                            <input type="text" name="zip31" maxlength="3" placeholder="000">
+                                            <input type="text"
+                                                v-model="state.registerForm.zipCode"
+                                                v-bind:class="v$.zipCode.$errors == !v$.zipCode.$errors ? 'success' : 'error'"
+                                                @blur="v$.$touch()"
+                                                name="zip31" maxlength="3" placeholder="000">
+                                            <span class="invalid-feedback" v-for="error of v$.zipCode.$errors" :key="error.$uid">{{ error.$message }}</span>
                                         </div>
                                         <div>
-                                            <input type="text" name="zip32" maxlength="4" onKeyUp="AjaxZip3.zip2addr('zip31','zip32','pref','pref','addr1');" placeholder="0000">
+                                            <input type="text" 
+                                                v-model="state.registerForm.zipCode"
+                                                v-bind:class="v$.zipCode.$errors == !v$.zipCode.$errors ? 'success' : 'error'"
+                                                @blur="v$.$touch()"
+                                                name="zip32" 
+                                                maxlength="4" 
+                                                onKeyUp="AjaxZip3.zip2addr('zip31','zip32','pref','pref','addr1');" 
+                                                placeholder="0000">
+                                                <span class="invalid-feedback" v-for="error of v$.zipCode.$errors" :key="error.$uid">{{ error.$message }}</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form_box">
                                     <div class="form_headline">
                                         ご住所
                                     </div>
                                     <div class="pref"></div>
-                                    <input type="text" name="addr1" placeholder="〇〇町1-1　〇〇マンション301">
+                                    <input type="text" 
+                                        v-model="state.registerForm.address"
+                                        v-bind:class="v$.address.$errors == !v$.address.$errors ? 'success' : 'error'"
+                                        @blur="v$.$touch()"
+                                        name="addr1" 
+                                        placeholder="〇〇町1-1　〇〇マンション301">
+                                        <span class="invalid-feedback" v-for="error of v$.address.$errors" :key="error.$uid">{{ error.$message }}</span>
                                 </div>
                                 <div class="form_box">
                                     <div class="form_headline">
                                     電話番号
                                     </div>
-                                    <input type="text" name="" placeholder="000-0000-0000">
+                                    <input type="text"
+                                        v-model="state.registerForm.phone"
+                                        v-bind:class="v$.phone.$errors == !v$.phone.$errors ? 'success' : 'error'"
+                                        @blur="v$.$touch()"
+                                        name="" 
+                                        placeholder="000-0000-0000">
+                                        <span class="invalid-feedback" v-for="error of v$.phone.$errors" :key="error.$uid">{{ error.$message }}</span>
                                 </div>
                                 <div class="form_box">
                                     <div class="form_headline">
                                     メールアドレス
                                     </div>
-                                    <input type="email" name="" placeholder="example@example.com">
+                                    <input type="email"
+                                        v-model="state.registerForm.email"
+                                        v-bind:class="v$.email.$errors == !v$.email.$errors ? 'success' : 'error'"
+                                        @blur="v$.$touch()"
+                                        name=""
+                                        placeholder="example@example.com">
+                                        <span class="invalid-feedback" v-for="error of v$.email.$errors" :key="error.$uid">{{ error.$message }}</span>
                                 </div>
                                 <div class="form_box">
                                     <div class="form_headline">
                                     パスワード
                                     </div>
-                                    <input type="text" name="" placeholder="※半角英数字１５文字以内">
+                                    <input type="text" 
+                                        v-model="state.registerForm.password"
+                                        v-bind:class="v$.password.$errors == !v$.password.$errors ? 'success' : 'error'"
+                                        @blur="v$.$touch()"
+                                        name="" 
+                                        placeholder="※半角英数字１５文字以内">
+                                        <span class="invalid-feedback" v-for="error of v$.password.$errors" :key="error.$uid">{{ error.$message }}</span>
                                 </div>
                                 </div>
                                 <!-- 学校フォーム -->
@@ -159,7 +214,7 @@
                             </div>
                             <div class="button">
                                 <div>
-                                    <input type="submit" class="button01" name="Submit" value="確認画面へ">
+                                    <input type="submit" @click.prevent="handleRegister()" class="button01" name="Submit" value="確認画面へ">
                                 </div>
                             </div>
                         </div>
@@ -172,4 +227,73 @@
 
 <script setup>
 import layout from '../layout/App.vue'
+import { reactive } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, numeric, minLength, maxLength, helpers } from '@vuelidate/validators'
+import axios from "axios";
+import SwalAlertHelper from '../../utils/SwalAlertHelper';
+
+const route = useRoute()
+const router = useRouter()
+
+const state = reactive({
+    registerForm: {
+        organizationName: '',
+        affiliates: '',
+        name: '',
+        address: '',
+        phone: '',
+        email: '',
+        password: ''
+    }
+})
+
+const validations = {
+    organizationName: {required:helpers.withMessage("Organization name is required", required), $autoDirty: true},
+    affiliates: {required:helpers.withMessage("Affiliates is required", required), $autoDirty: true},
+    name: {required:helpers.withMessage("Admin name is required", required), $autoDirty: true},
+    address: {required:helpers.withMessage("Address is required", required), $autoDirty: true},
+    phone: {required:helpers.withMessage("Phone is required", required), numeric, minLength: minLength(10), maxLength: maxLength(10), $autoDirty: true},
+    email: { required:helpers.withMessage("Email is required", required), email, $autoDirty: true},
+    password: { required:helpers.withMessage("Password is required", required), minLength: minLength(3), maxLength: maxLength(8), $autoDirty: true}
+}
+
+const v$ = useVuelidate(validations, state.registerForm)
+
+const handleRegister = () => {
+    if(v$.value.$touch()) {
+        axios.post(`http://localhost:8000/api/users`, state.registerForm).then(res => {
+            if(res.data.success) {
+                SwalAlertHelper.warningForm('error', 'Please enter all information to register')
+                return
+            }
+        }).catch(() => {
+            SwalAlertHelper.warningForm('error', 'Something went wrong')
+        })
+  
+    }
+
+    state.registerForm = ''
+
+    if(state.registerForm) {
+        router.push({name: 'login'})
+    }
+    
+}
+
 </script>
+
+<style scoped>
+.invalid-feedback {
+    color: red;
+}
+.success {
+    border: 2px solid #ccc !important;
+    border-radius: 3px;
+}
+.error {
+    border: 2px solid red !important;
+    border-radius: 3px;
+}
+</style>

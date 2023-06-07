@@ -4,7 +4,7 @@
             <main class="container">
                 <h1>ページ一覧</h1>
                 <div>
-                    <router-link :to="{name: 'register'}" target="_blank">
+                    <router-link :to="{name: 'register'}">
                         お客様登録(5)
                     </router-link><br>
                     <router-link :to="{name: 'confirmation-register'}" target="_blank">

@@ -31,6 +31,7 @@ const useUserStore = defineStore('userStore', () => {
     }
 
     const logout = () => {
+        SwalAlertHelper.warningForm('success', 'Sign out successful')
         return localStorage.removeItem('user_info')
     }
 
