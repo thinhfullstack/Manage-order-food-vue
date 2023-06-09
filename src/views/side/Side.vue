@@ -19,9 +19,9 @@
         </div>
 
         <div class="side_menu_box">
-            <a href="cart-lunch_p9.html">
+            <router-link :to="{name: 'update-profile'}">
                 &gt; 管理者情報の管理
-            </a>
+            </router-link>
         </div>
 
         <div class="side_menu_box">

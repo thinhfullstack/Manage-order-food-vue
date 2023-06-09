@@ -27,7 +27,7 @@
                     <router-link :to="{name: 'cart-lunch_p13_3'}" target="_blank">
                         注文者情報の管理：完了(13_3)
                     </router-link><br>
-                    <router-link :to="{name: 'cart-lunch_p9'}" target="_blank">
+                    <router-link :to="{name: 'update-profile'}" target="_blank">
                         管理者情報の管理(9)
                     </router-link>
                 </div>

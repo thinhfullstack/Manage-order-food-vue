@@ -37,9 +37,9 @@
                 </div>
 
                 <div class="contents_box">
-                  <a href="cart-lunch_p9.html">
-                    &gt; 管理者情報の管理
-                  </a>
+                  <router-link :to="{name: 'update-profile'}">
+                    &gt; '管理者情報の管理'
+                  </router-link>
                 </div>
 
                 <div class="contents_box">
