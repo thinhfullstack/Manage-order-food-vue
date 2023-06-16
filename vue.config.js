@@ -4,7 +4,10 @@ module.exports = defineConfig({
   lintOnSave: false,
   devServer: {
     client: {
-      overlay: true,
+      overlay: {
+        warnings: true,
+        errors: true
+      }
     },
   },
 })

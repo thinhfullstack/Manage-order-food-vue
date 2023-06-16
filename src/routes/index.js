@@ -10,16 +10,16 @@ import ConfirmationRegister from '../views/auth/ConfirmationRegister.vue';
 import CompleteRegister from '../views/auth/CompleteRegister.vue';
 
 // navbar
-import OrderCalendar from '../views/navbar/OrderCalendar.vue';
-import NoticePage from '../views/navbar/NoticePage.vue';
-import MyPageAdmin from '../views/navbar/MyPageAdmin.vue';
+import OrderCalendar from '../views/mypage/OrderCalendar.vue';
+import NoticePage from '../views/mypage/NoticePage.vue';
+import MyPageAdmin from '../views/mypage/Index.vue';
 
 // management order information
 import Index from '../views/manage-order-information/Index.vue';
 import RegisterOrder from '../views/manage-order-information/RegisterOrder.vue';
 import ConfirmationScreen from '../views/manage-order-information/ConfirmationScreen.vue';
 import Complete from '../views/manage-order-information/Complete.vue';
-import Administrator from '../views/manage-order-information/Administrator.vue';
+import UpdateProfile from '../views/manage-order-information/UpdateProfile.vue';
 // order history
 import MyPageTop from '../views/order-history/MyPageTop.vue';
 import Monthly from '../views/order-history/Monthly.vue';
@@ -85,54 +85,57 @@ const routes = [
     },
 
     {
-      path: '/navbar',
+      path: '/mypage',
       children: [
         {
-          path: '/navbar/order-calendar',
+          path: '/mypage/order-calendar',
           component: OrderCalendar,
           name: 'order-calendar',
+          meta: { requiresAuth: true }
         },
         {
-          path: '/navbar/notice-page',
+          path: '/mypage/notice-page',
           component: NoticePage,
           name: 'notice-page',
+          meta: { requiresAuth: true }
         },
         {
-          path: '/navbar/my-page-admin',
+          path: '/mypage/my-page-admin',
           component: MyPageAdmin,
           name: 'my-page-admin',
+          meta: { requiresAuth: true }
         }
       ]
     },
 
     {
-      path: '/manage-order-information',
+      path: '/manage-mypage',
       children: [
         {
-          path: '/manage-order-information/index',
+          path: '/manage-mypage/index',
           component: Index,
           name: 'cart-lunch_p10',
         },
         {
-          path: '/manage-order-information/register-order',
+          path: '/manage-mypage/register-order',
           component: RegisterOrder,
           name: 'cart-lunch_p13',
         },
         {
-          path: '/manage-order-information/confirmation-screen',
+          path: '/manage-mypage/confirmation-screen',
           component: ConfirmationScreen,
           name: 'cart-lunch_p13_2',
         },
         {
-          path: '/manage-order-information/complete',
+          path: '/manage-mypage/complete',
           component: Complete,
           name: 'cart-lunch_p13_3',
         },
         {
-          path: '/manage-order-information/administrator',
-          component: Administrator,
-          name: 'cart-lunch_p9',
-        }
+          path: '/manage-mypage/update-profile',
+          component: UpdateProfile,
+          name: 'update-profile',
+        },
       ]
     },
 
@@ -265,20 +268,23 @@ const router = createRouter({
   routes,
 })
 
-
 router.beforeEach((to, from, next) => {
   let userStore = useUserStore()
   let loggedUser = userStore.me()
+  let checkMetaRequiresAuth = to.name === 'login' && to.name === 'my-page-admin' && to.name === 'order-calendar' && to.name === 'notice-page'
 
-  if (loggedUser && loggedUser.token && to.name === 'login') {
-    return next({name: 'home'})
-  }
-
-  if (!loggedUser && to.name !== 'login' && to.name !== 'register') {
-    return next({name: 'login'})
-  }
-
-  next()
+  if (to.meta.requiresAuth) {
+    if (!loggedUser && to.name !== 'login') {
+      return next({ name: 'login' });
+    } else {
+      return next();
+    }
+  } 
+  else if (checkMetaRequiresAuth && loggedUser && loggedUser.token) {
+    return next({ name: 'home' });
+  } 
+  
+  next();
 })
 
 export default router

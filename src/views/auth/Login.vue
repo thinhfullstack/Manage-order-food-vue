@@ -33,7 +33,7 @@
                             <input type="password" 
                                 v-on:keyup.enter="handleLogin()"
                                 v-model="state.loginForm.password"
-                                v-bind:class="v$.email.$errors == !v$.email.$errors ? 'blue' : 'error'"
+                                v-bind:class="v$.password.$errors == !v$.password.$errors ? 'blue' : 'error'"
                                 @blur="v$.$touch()"
                                 placeholder="●●●●●●"
                             >
@@ -113,13 +113,17 @@ const v$ = useVuelidate(validations, state.loginForm)
 
 const handleLogin = () => {
     v$.value.$touch()
-    if(v$.value.$error || !v$.value.$error) {
+    if(!v$.value.$error) {
         SwalAlertHelper.messageForm('success', 'Logged in successfully')
         
         userStore.login(state.loginForm.email, state.loginForm.password).then(() => {
             router.push({name: 'home'})
         })
+
+        return
     }
+
+    SwalAlertHelper.messageForm('error', 'Please enter all information to login')
 }
 
 </script>
