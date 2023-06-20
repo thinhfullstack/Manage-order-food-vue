@@ -43,9 +43,9 @@
                 </div>
 
                 <div class="contents_box">
-                  <a href="cart-lunch_p13.html">
+                  <router-link :to="{name: 'create-order'}">
                     &gt; 注文者情報の登録
-                  </a>
+                  </router-link>
                 </div>
 
                 <div class="contents_box">

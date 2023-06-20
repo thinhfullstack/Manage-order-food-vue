@@ -16,7 +16,7 @@ import MyPageAdmin from '../views/mypage/Index.vue';
 
 // management order information
 import Index from '../views/manage-order-information/Index.vue';
-import RegisterOrder from '../views/manage-order-information/RegisterOrder.vue';
+import CreateOrder from '../views/manage-order-information/CreateOrder.vue';
 import ConfirmationScreen from '../views/manage-order-information/ConfirmationScreen.vue';
 import Complete from '../views/manage-order-information/Complete.vue';
 import UpdateProfile from '../views/manage-order-information/UpdateProfile.vue';
@@ -117,9 +117,9 @@ const routes = [
           name: 'cart-lunch_p10',
         },
         {
-          path: '/manage-mypage/register-order',
-          component: RegisterOrder,
-          name: 'cart-lunch_p13',
+          path: '/manage-mypage/create-order',
+          component: CreateOrder,
+          name: 'create-order',
         },
         {
           path: '/manage-mypage/confirmation-screen',
